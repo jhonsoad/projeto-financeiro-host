@@ -4,6 +4,12 @@
   color: var(--color-white);
 }
 
+.footer-logged {
+  background-color: var(--color-bg-blue);
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  color: var(--color-white);
+}
+
 .container {
   display: flex;
   justify-content: space-evenly;

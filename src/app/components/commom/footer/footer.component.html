@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer [ngClass]="{'footer': !isLoggedIn, 'footer-logged': isLoggedIn}">
   <div class="container">
     <div class="footerColumn">
       <h3 class="columnTitle">Serviços</h3>

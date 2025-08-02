@@ -1,5 +1,6 @@
-<app-header></app-header>
+<app-header 
+  [isLoggedIn]="loggedIn"
+  [userName]="userName">
+</app-header>
 <router-outlet />
-<button type="button" [routerLink]="'/projetoFinanceiro'">Carregar MFE</button>
-<button type="button" [routerLink]="'/'">Ir para home</button>
-<app-footer></app-footer>
+<app-footer [isLoggedIn]="loggedIn"></app-footer>

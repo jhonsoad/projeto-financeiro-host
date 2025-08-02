@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './footer.component.css'
 })
 export class FooterComponent {
+  @Input() isLoggedIn: boolean = false;
   meAjudaLink: string = 'meajuda@bytebank.com.br';
   ouvidoriaLink: string = 'ouvidoria@bytebank.com.br';
  }
