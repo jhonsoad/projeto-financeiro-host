@@ -1,1 +1,30 @@
-<p>home works!</p>
+<main class="homeMain">
+  <section class="homeSection">
+    <div class="homeContent">
+      <h2 class="homeTitle">
+        Experimente mais liberdade no
+        controle da sua vida financeira.
+        Crie sua conta com a gente!
+      </h2>
+    </div>
+    <img
+      src="../../../assets/images/illustration.svg"
+      alt="ByteBank Illustration"
+      width="661"
+      height="412"
+      priority
+    />
+  </section>
+  <section class="advantagesSection">
+    <h2 class="sectionTitle">Vantagens do nosso banco:</h2>
+    <div class="advantagesGrid">
+      @for (vantagem of vantagens; track $index) {
+        <app-advantage-card
+          [iconSrc]="vantagem.iconSrc"
+          [title]="vantagem.title"
+          [description]="vantagem.description"
+        />
+      }
+    </div>
+  </section>
+</main>

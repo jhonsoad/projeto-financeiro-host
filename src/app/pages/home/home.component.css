@@ -1,0 +1,81 @@
+.homeMain {
+  background-color: var(--color-bg-blue);
+  background-image: var(--color-bg-gradient);
+  margin-bottom: 120px;
+}
+
+.homeSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 var(--spacing-lg);
+  gap: var(--spacing-3xl);
+  min-height: 500px;
+  color: var(--color-white);
+}
+
+.homeContent {
+  max-width: 450px;
+  text-align: left;
+}
+
+.homeTitle {
+  font-size: var(--font-size-title-h1);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-black);
+}
+
+/* --- Vantagens --- */
+.advantagesSection {
+  text-align: center;
+  padding: 0 var(--spacing-lg);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-title-h2);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-black);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.advantagesGrid {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-2xl);
+}
+
+/* Responsividade */
+@media (max-width: var(--breakpoint-tablet)) {
+  .heroSection {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--spacing-2xl) var(--spacing-md);
+  }
+
+  .heroContent {
+    max-width: 100%;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .heroIllustration {
+    width: 80%;
+    height: auto;
+  }
+
+  .heroTitle {
+    font-size: var(--font-size-h4);
+  }
+
+  .heroSubtitle {
+    font-size: var(--font-size-body-large);
+  }
+
+  .sectionTitle {
+    font-size: var(--font-size-h5);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .advantagesGrid {
+    grid-template-columns: 1fr;
+  }
+}

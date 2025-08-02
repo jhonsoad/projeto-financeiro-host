@@ -10,7 +10,7 @@ export const routes: Routes = [
   { 
     path: 'projetoFinanceiro', 
     loadComponent: () => loadRemoteModule('mfe1', './Component')
-      .then((m) => m.HomeComponent)
+      .then((m) => m.InicioComponent)
   }
 
 ];
