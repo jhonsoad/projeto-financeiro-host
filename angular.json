@@ -61,7 +61,8 @@
 							"src/app/shared/design-system/breakpoints.css",
 							"src/app/shared/design-system/colors.css",
 							"src/app/shared/design-system/spacing.css",
-							"src/app/shared/design-system/typography.css"
+							"src/app/shared/design-system/typography.css",
+							"src/app/shared/design-system/variables.css"
 						],
 						"scripts": []
 					}
@@ -94,7 +95,8 @@
 							"src/app/shared/design-system/breakpoints.css",
 							"src/app/shared/design-system/colors.css",
 							"src/app/shared/design-system/spacing.css",
-							"src/app/shared/design-system/typography.css"
+							"src/app/shared/design-system/typography.css",
+							"src/app/shared/design-system/variables.css"
 						],
 						"scripts": []
 					},
