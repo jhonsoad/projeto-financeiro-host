@@ -1,59 +1,126 @@
-# Host
+🚀 ByteBank - Gerenciamento Financeiro (Projeto Host)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+🎯 Sobre o Projeto
+Este repositório contém o projeto Host de uma aplicação de gerenciamento financeiro, desenvolvida como parte do Tech Challenge. O objetivo deste projeto é atuar como a interface principal que integra diferentes Micro Frontends (MFEs), proporcionando uma experiência de usuário unificada. Ele gerencia as rotas, a autenticação e a navegação entre os módulos, sendo o ponto de entrada para todas as funcionalidades da aplicação.
 
-## Development server
+As responsabilidades do projeto host incluem:
 
-To start a local development server, run:
+Estrutura da Interface: Exibir o cabeçalho e rodapé fixos, além de gerenciar a área onde o conteúdo dinâmico (microfrontends e rotas internas) é renderizado.
 
-```bash
-ng serve
-```
+Autenticação de Usuário: Interagir com a API de back-end para permitir o login e o registro de usuários.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Gerenciamento de Estado: Utilizar o NgRx para armazenar informações do usuário, como o status de autenticação e dados de transações.
 
-## Code scaffolding
+Navegação e Roteamento: Definir as rotas da aplicação, incluindo rotas protegidas que exigem autenticação e que carregam os microfrontends de forma assíncrona.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-```bash
-ng generate component component-name
-```
+🏛️ Arquitetura e Tecnologias
+A arquitetura do projeto é baseada em Micro Frontends (MFEs), utilizando a biblioteca @angular-architects/native-federation para a orquestração dos módulos.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Tecnologias Principais:
 
-```bash
-ng generate --help
-```
+Angular v19.2.0 
 
-## Building
+Micro Frontends (MFEs): Arquitetura que permite o desenvolvimento, deploy e gerenciamento de partes da aplicação de forma independente, sendo orquestrada pelo projeto host.
 
-To build the project run:
+NgRx Store: Biblioteca para gerenciamento de estado da aplicação, utilizando um fluxo de dados previsível. O projeto usa NgRx para gerenciar o estado de transações, incluindo ações, reducers e selectors.
 
-```bash
-ng build
-```
+TypeScript: Superset do JavaScript que adiciona tipagem estática, garantindo maior robustez e manutenibilidade ao código.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Angular CLI: Ferramenta de linha de comando para inicializar, desenvolver e manter aplicações Angular.
 
-## Running unit tests
+Docker: Para containerização da aplicação, facilitando a execução em diferentes ambientes.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+HTTP Interceptor: Implementado para gerenciar a autenticação e incluir o token JWT em todas as requisições para rotas protegidas.
 
-```bash
-ng test
-```
+Configuração do Micro Frontend
+O projeto Host é configurado para carregar um Micro Frontend chamado mfe1 de um repositório remoto, utilizando a rota /projetoFinanceiro. Para acessar esta rota, o usuário deve estar autenticado, o que é verificado por um 
 
-## Running end-to-end tests
+AuthGuard. O arquivo 
 
-For end-to-end (e2e) testing, run:
+federation.manifest.json define o endereço do MFE.
 
-```bash
-ng e2e
-```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+📁 Estrutura de Arquivos 
+Aqui está uma visão geral dos arquivos e diretórios mais importantes do projeto:
 
-## Additional Resources
+package.json: Define as dependências do projeto, como native-federation e ngrx, e os scripts para executar e construir a aplicação.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+federation.config.js: O coração da arquitetura de Microfrontends. Ele configura como os módulos remotos são carregados, quais dependências são compartilhadas e quais não são.
+
+src/app/: O diretório principal da aplicação.
+
+app.component.ts: O componente raiz que lida com a exibição de componentes comuns (cabeçalho, rodapé) e a lógica principal da aplicação.
+
+app.routes.ts: Define as rotas principais. A rota 'projetoFinanceiro' é um exemplo de como carregar o mfe1 dinamicamente.
+
+src/app/core/: Contém os serviços e guards da aplicação.
+
+auth-guard/auth-guard.guard.ts: Um CanActivate guard que protege rotas. Ele verifica se o usuário está autenticado antes de permitir o acesso.
+
+auth-interceptor/auth.interceptor.ts: Um interceptor HTTP que adiciona o token JWT ao cabeçalho Authorization de todas as requisições para a API.
+
+src/app/services/: Contém serviços que interagem com a API.
+
+auth/auth.service.ts: Serviço que faz as requisições para os endpoints de login e register na API.
+
+src/app/shared/components/: Componentes reutilizáveis.
+
+login-modal/: Contém a lógica para o modal de login.
+
+register-modal/: Contém a lógica para o modal de registro.
+
+src/app/shared/store/: O diretório do NgRx.
+
+transaction.actions.ts: Define as ações para interagir com as transações.
+
+transaction.reducer.ts: Define como o estado das transações muda com base nas ações.
+
+transaction.selectors.ts: Define funções para selecionar partes específicas do estado global.
+
+
+✨ Funcionalidades do Projeto Host
+As funcionalidades principais implementadas no projeto host incluem:
+
+Homepage: Uma página de boas-vindas que destaca as vantagens de abrir uma conta.
+
+Modais de Autenticação: A página inicial apresenta botões para "Login" e "Registrar", que abrem modais para que o usuário insira suas credenciais.
+
+Roteamento Dinâmico: Ao fazer login, o usuário é redirecionado para a rota /projetoFinanceiro, que carrega o microfrontend mfe1. Esta rota é protegida pelo AuthGuard.
+
+Integração com a API: O AuthService e o AuthInterceptor garantem a comunicação segura com a API para login e outras operações.
+
+Estado Compartilhado: O NgRx é utilizado para gerenciar o estado do usuário, como o token de autenticação e a lista de transações, tornando-o acessível a todos os componentes.
+
+Componentes Reutilizáveis: Componentes de interface como Header e Footer. Modais para login e registro (LoginModalComponent e RegisterModalComponent).
+
+
+💻 Como Rodar o Projeto
+Pré-requisitos
+Certifique-se de ter o Docker e/ou Node.js instalados.
+
+Com Docker
+Construir a imagem:
+
+docker build -t tech-challenge .
+Executar o container:
+
+docker run -p 3000:3000 tech-challenge
+A aplicação estará disponível em http://localhost:3000.
+
+Sem Docker
+
+Instalar as Dependências: Navegue até o diretório raiz do projeto e execute:
+
+npm install
+
+Iniciar o Projeto Host: Inicie o servidor de desenvolvimento do Angular:
+
+npm start
+
+O projeto estará acessível em http://localhost:4200.
+
+Iniciar o Microfrontend (MFE1): Para que a rota /projetoFinanceiro funcione corretamente, é necessário que o projeto mfe1 esteja em execução. Certifique-se de iniciar o servidor dele em seu respectivo repositório. O host irá carregá-lo dinamicamente a partir de http://localhost:4201.
+
+⚙️ API (Back-end)
+Este projeto host interage com uma API REST. As rotas para esta API estão detalhadas abaixo.

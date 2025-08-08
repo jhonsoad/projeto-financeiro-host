@@ -23,12 +23,8 @@
     </div>
 
     <div *ngIf="!isLoggedIn" class="actions">
-      <a routerLink="/projetoFinanceiro">
-        <app-button variant="primary">Abrir minha conta</app-button>
-      </a>
-      <a routerLink="/projetoFinanceiro">
-        <app-button variant="outline">Já tenho conta</app-button>
-      </a>
+      <app-button variant="primary" (click)="openRegisterModal.emit(true)">Abrir minha conta</app-button>
+      <app-button variant="outline" (click)="openLoginModal.emit(true)">Já tenho conta</app-button>
     </div>
   </div>
 </header>

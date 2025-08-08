@@ -1,6 +1,10 @@
 <app-header 
   [isLoggedIn]="loggedIn"
-  [userName]="userName">
+  [userName]="userName"
+  (openLoginModal)="openLoginModal()"
+  (openRegisterModal)="openRegisterModal()">
 </app-header>
 <router-outlet />
 <app-footer [isLoggedIn]="loggedIn"></app-footer>
+<app-login-modal [isLoginModalOpen]="isLoginModalOpen" (onClose)="closeLoginModal()"></app-login-modal>
+<app-register-modal [isRegisterModalOpen]="isRegisterModalOpen" (onClose)="closeRegisterModal()"></app-register-modal>
