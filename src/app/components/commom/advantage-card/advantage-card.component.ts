@@ -15,7 +15,6 @@ export class AdvantageCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // Validação de inputs
     if (!this.iconSrc || !this.title || !this.description) {
       console.error('AdvantageCardComponent requires iconSrc, title, and description inputs.');
     }

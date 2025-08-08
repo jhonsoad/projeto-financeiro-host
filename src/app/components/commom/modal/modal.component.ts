@@ -16,12 +16,9 @@ export class ModalComponent implements OnChanges {
   
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['isOpen'] && changes['isOpen'].currentValue) {
-      // Aqui você pode adicionar lógica para manipulação de DOM se necessário
-      // (ex: adicionar uma classe ao body para evitar scroll)
     }
   }
 
-  // Escuta o evento de click em todo o documento
   @HostListener('document:mousedown', ['$event'])
   onClickOutside(event: MouseEvent) {
     if (this.isOpen && !this.elementRef.nativeElement.contains(event.target)) {
