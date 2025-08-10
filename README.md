@@ -102,11 +102,11 @@ Certifique-se de ter o Docker e/ou Node.js instalados.
 Com Docker
 Construir a imagem:
 
-docker build -t tech-challenge .
+docker build -t host-app .
 Executar o container:
 
-docker run -p 3000:3000 tech-challenge
-A aplicação estará disponível em http://localhost:3000.
+docker run -p 80:80 host-app
+A aplicação estará disponível em http://localhost:80/index.html.
 
 Sem Docker
 
