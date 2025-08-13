@@ -105,8 +105,8 @@ Construir a imagem:
 docker build -t host-app .
 Executar o container:
 
-docker run -p 80:80 host-app
-A aplicação estará disponível em http://localhost:80/index.html.
+docker run -p 4200:4200 host-app
+A aplicação estará disponível em http://localhost:4200.
 
 Sem Docker
 

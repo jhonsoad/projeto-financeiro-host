@@ -17,7 +17,7 @@ COPY --from=builder /app/dist/host/browser usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 # copia o mime.types da aplicaco para configura o ngnix
 COPY mime.types /etc/nginx/mime.types
-# expoe aplicacao na porta 80
-EXPOSE 80
+# expoe aplicacao na porta 4200
+EXPOSE 4200
 # executa comando para iniciar a aplicacao
 CMD [ "nginx", "-g", "daemon off;" ]
