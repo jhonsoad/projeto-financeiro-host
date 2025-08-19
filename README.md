@@ -1,126 +1,140 @@
-🚀 ByteBank - Gerenciamento Financeiro (Projeto Host)
+# 🚀 ByteBank - Gerenciamento Financeiro (Projeto Host)
 
-🎯 Sobre o Projeto
-Este repositório contém o projeto Host de uma aplicação de gerenciamento financeiro, desenvolvida como parte do Tech Challenge. O objetivo deste projeto é atuar como a interface principal que integra diferentes Micro Frontends (MFEs), proporcionando uma experiência de usuário unificada. Ele gerencia as rotas, a autenticação e a navegação entre os módulos, sendo o ponto de entrada para todas as funcionalidades da aplicação.
+## 🎯 Sobre o Projeto
 
-As responsabilidades do projeto host incluem:
+Este repositório apresenta o **Projeto Host** de uma aplicação de gerenciamento financeiro, desenvolvido como parte de um Tech Challenge. Nosso principal objetivo é criar uma interface unificada que integre diversos **Micro Frontends (MFEs)**, proporcionando uma experiência de usuário coesa e eficiente. O projeto host atua como o ponto de entrada central, gerenciando rotas, autenticação e a navegação fluida entre os módulos.
 
-Estrutura da Interface: Exibir o cabeçalho e rodapé fixos, além de gerenciar a área onde o conteúdo dinâmico (microfrontends e rotas internas) é renderizado.
+### Responsabilidades Chave do Projeto Host:
 
-Autenticação de Usuário: Interagir com a API de back-end para permitir o login e o registro de usuários.
+*   **Estrutura da Interface:** Responsável por exibir elementos fixos como cabeçalho e rodapé, além de gerenciar a área onde o conteúdo dinâmico dos microfrontends e rotas internas é renderizado.
+*   **Autenticação de Usuário:** Interage diretamente com a API de back-end para facilitar o processo de login e registro de usuários, garantindo acesso seguro.
+*   **Gerenciamento de Estado:** Utiliza a biblioteca **NgRx** para um gerenciamento de estado robusto, armazenando informações cruciais do usuário, como status de autenticação e dados de transações.
+*   **Navegação e Roteamento:** Define e gerencia as rotas da aplicação, incluindo rotas protegidas que exigem autenticação e que carregam os microfrontends de forma assíncrona, otimizando o desempenho.
 
-Gerenciamento de Estado: Utilizar o NgRx para armazenar informações do usuário, como o status de autenticação e dados de transações.
+## 🏛️ Arquitetura e Tecnologias
 
-Navegação e Roteamento: Definir as rotas da aplicação, incluindo rotas protegidas que exigem autenticação e que carregam os microfrontends de forma assíncrona.
+A arquitetura do projeto é fundamentada no conceito de **Micro Frontends (MFEs)**, utilizando a poderosa biblioteca `@angular-architects/native-federation` para a orquestração eficiente dos módulos, permitindo um desenvolvimento escalável e independente.
 
+### Tecnologias Principais Utilizadas:
 
-🏛️ Arquitetura e Tecnologias
-A arquitetura do projeto é baseada em Micro Frontends (MFEs), utilizando a biblioteca @angular-architects/native-federation para a orquestração dos módulos.
+*   **Angular v19.2.0:** Framework de desenvolvimento front-end robusto e amplamente utilizado, garantindo alta performance e manutenibilidade.
+*   **Micro Frontends (MFEs):** Abordagem arquitetural que permite o desenvolvimento, deploy e gerenciamento de partes da aplicação de forma independente, com o projeto host orquestrando a integração.
+*   **NgRx Store:** Uma biblioteca de gerenciamento de estado para aplicações Angular, que implementa o padrão Redux. Proporciona um fluxo de dados previsível e centralizado, sendo utilizado para gerenciar o estado de transações (ações, reducers e selectors).
+*   **TypeScript:** Um superset do JavaScript que adiciona tipagem estática, resultando em um código mais robusto, legível e com maior capacidade de manutenção.
+*   **Angular CLI:** Ferramenta de linha de comando essencial para inicializar, desenvolver, testar e manter aplicações Angular de forma eficiente.
+*   **Docker:** Utilizado para a containerização da aplicação, o Docker facilita a implantação e execução em diferentes ambientes, garantindo consistência e isolamento.
+*   **HTTP Interceptor:** Implementado para gerenciar a autenticação de forma transparente, adicionando automaticamente o token JWT (JSON Web Token) a todas as requisições para rotas protegidas, reforçando a segurança.
 
-Tecnologias Principais:
+### Configuração do Micro Frontend
 
-Angular v19.2.0 
+O projeto Host é configurado para carregar um Micro Frontend específico, denominado `mfe1`, a partir de um repositório remoto. Este MFE é acessível através da rota `/projetoFinanceiro`. É importante notar que o acesso a esta rota é protegido por um `AuthGuard`, que verifica a autenticação do usuário antes de permitir o carregamento. O arquivo `federation.manifest.json` é o responsável por definir o endereço e as configurações de carregamento do MFE.
 
-Micro Frontends (MFEs): Arquitetura que permite o desenvolvimento, deploy e gerenciamento de partes da aplicação de forma independente, sendo orquestrada pelo projeto host.
+## 📁 Estrutura de Arquivos
 
-NgRx Store: Biblioteca para gerenciamento de estado da aplicação, utilizando um fluxo de dados previsível. O projeto usa NgRx para gerenciar o estado de transações, incluindo ações, reducers e selectors.
+A seguir, uma visão geral da estrutura de arquivos e diretórios mais importantes do projeto, que reflete a organização e modularidade da aplicação:
 
-TypeScript: Superset do JavaScript que adiciona tipagem estática, garantindo maior robustez e manutenibilidade ao código.
+```
+. 
+├── package.json
+├── federation.config.js
+└── src/
+    └── app/
+        ├── app.component.ts
+        ├── app.routes.ts
+        ├── core/
+        │   ├── auth-guard/auth-guard.guard.ts
+        │   └── auth-interceptor/auth.interceptor.ts
+        ├── services/
+        │   └── auth/auth.service.ts
+        ├── shared/
+        │   ├── components/
+        │   │   ├── login-modal/
+        │   │   └── register-modal/
+        │   └── store/
+        │       ├── transaction.actions.ts
+        │       ├── transaction.reducer.ts
+        │       └── transaction.selectors.ts
+        └── ...
+```
 
-Angular CLI: Ferramenta de linha de comando para inicializar, desenvolver e manter aplicações Angular.
+### Detalhamento dos Arquivos e Diretórios:
 
-Docker: Para containerização da aplicação, facilitando a execução em diferentes ambientes.
+*   `package.json`: Contém as dependências do projeto (como `native-federation` e `ngrx`) e os scripts para executar e construir a aplicação.
+*   `federation.config.js`: O coração da arquitetura de Micro Frontends. Este arquivo configura como os módulos remotos são carregados, quais dependências são compartilhadas e quais não são, otimizando o carregamento e a performance.
+*   `src/app/`: O diretório principal da aplicação, onde a lógica e os componentes são organizados.
+    *   `app.component.ts`: O componente raiz da aplicação, responsável pela exibição de componentes comuns (cabeçalho, rodapé) e pela lógica principal.
+    *   `app.routes.ts`: Define as rotas principais da aplicação. A rota `'projetoFinanceiro'` é um exemplo de como o `mfe1` é carregado dinamicamente.
+*   `src/app/core/`: Contém os serviços e guards essenciais para o funcionamento da aplicação.
+    *   `auth-guard/auth-guard.guard.ts`: Um `CanActivate` guard que protege rotas, verificando se o usuário está autenticado antes de permitir o acesso.
+    *   `auth-interceptor/auth.interceptor.ts`: Um interceptor HTTP que adiciona o token JWT ao cabeçalho `Authorization` de todas as requisições para a API, garantindo a segurança.
+*   `src/app/services/`: Contém os serviços responsáveis pela interação com a API.
+    *   `auth/auth.service.ts`: Serviço que encapsula as requisições para os endpoints de login e registro na API.
+*   `src/app/shared/components/`: Componentes reutilizáveis que promovem a consistência da interface.
+    *   `login-modal/`: Contém a lógica e o template para o modal de login.
+    *   `register-modal/`: Contém a lógica e o template para o modal de registro.
+*   `src/app/shared/store/`: O diretório dedicado ao gerenciamento de estado com NgRx.
+    *   `transaction.actions.ts`: Define as ações que podem ser disparadas para interagir com o estado das transações.
+    *   `transaction.reducer.ts`: Define como o estado das transações é alterado em resposta às ações.
+    *   `transaction.selectors.ts`: Define funções para selecionar partes específicas do estado global, facilitando o acesso aos dados.
 
-HTTP Interceptor: Implementado para gerenciar a autenticação e incluir o token JWT em todas as requisições para rotas protegidas.
+## ✨ Funcionalidades do Projeto Host
 
-Configuração do Micro Frontend
-O projeto Host é configurado para carregar um Micro Frontend chamado mfe1 de um repositório remoto, utilizando a rota /projetoFinanceiro. Para acessar esta rota, o usuário deve estar autenticado, o que é verificado por um 
+O projeto host oferece um conjunto robusto de funcionalidades, projetadas para proporcionar uma experiência de usuário completa e segura:
 
-AuthGuard. O arquivo 
+*   **Homepage Intuitiva:** Uma página de boas-vindas que destaca os benefícios e vantagens de abrir uma conta no ByteBank, convidando o usuário a explorar a aplicação.
+*   **Modais de Autenticação:** A página inicial apresenta botões claros para "Login" e "Registrar", que abrem modais dedicados para que o usuário insira suas credenciais de forma segura e intuitiva.
+*   **Roteamento Dinâmico e Protegido:** Após o login bem-sucedido, o usuário é automaticamente redirecionado para a rota `/projetoFinanceiro`. Esta rota é responsável por carregar dinamicamente o microfrontend `mfe1`, e é protegida por um `AuthGuard`, garantindo que apenas usuários autenticados possam acessá-la.
+*   **Integração Segura com a API:** O `AuthService` e o `AuthInterceptor` trabalham em conjunto para garantir uma comunicação segura e eficiente com a API de back-end, lidando com o login e outras operações que exigem autenticação.
+*   **Estado Compartilhado com NgRx:** A utilização do NgRx permite o gerenciamento centralizado do estado do usuário, incluindo o token de autenticação e a lista de transações. Isso torna essas informações acessíveis a todos os componentes da aplicação de forma consistente.
+*   **Componentes Reutilizáveis:** O projeto faz uso de componentes de interface comuns, como `Header` e `Footer`, que garantem uma identidade visual consistente. Além disso, modais específicos para login (`LoginModalComponent`) e registro (`RegisterModalComponent`) são reutilizados, otimizando o desenvolvimento e a manutenção.
 
-federation.manifest.json define o endereço do MFE.
+## 💻 Como Rodar o Projeto
 
+Para colocar o projeto ByteBank em funcionamento, siga as instruções abaixo. Certifique-se de ter os pré-requisitos instalados.
 
-📁 Estrutura de Arquivos 
-Aqui está uma visão geral dos arquivos e diretórios mais importantes do projeto:
+### Pré-requisitos
 
-package.json: Define as dependências do projeto, como native-federation e ngrx, e os scripts para executar e construir a aplicação.
+Certifique-se de ter o **Docker** e/ou **Node.js** instalados em seu ambiente de desenvolvimento.
 
-federation.config.js: O coração da arquitetura de Microfrontends. Ele configura como os módulos remotos são carregados, quais dependências são compartilhadas e quais não são.
+### Com Docker
 
-src/app/: O diretório principal da aplicação.
+Para uma configuração rápida e isolada, utilize o Docker:
 
-app.component.ts: O componente raiz que lida com a exibição de componentes comuns (cabeçalho, rodapé) e a lógica principal da aplicação.
+1.  **Construir a imagem Docker:**
 
-app.routes.ts: Define as rotas principais. A rota 'projetoFinanceiro' é um exemplo de como carregar o mfe1 dinamicamente.
+    ```bash
+    docker build -t host-app .
+    ```
 
-src/app/core/: Contém os serviços e guards da aplicação.
+2.  **Executar o container:**
 
-auth-guard/auth-guard.guard.ts: Um CanActivate guard que protege rotas. Ele verifica se o usuário está autenticado antes de permitir o acesso.
+    ```bash
+    docker run -p 4200:4200 host-app
+    ```
 
-auth-interceptor/auth.interceptor.ts: Um interceptor HTTP que adiciona o token JWT ao cabeçalho Authorization de todas as requisições para a API.
+    A aplicação estará acessível em seu navegador através do endereço: `http://localhost:4200`.
 
-src/app/services/: Contém serviços que interagem com a API.
+### Sem Docker
 
-auth/auth.service.ts: Serviço que faz as requisições para os endpoints de login e register na API.
+Caso prefira rodar o projeto diretamente em seu ambiente local:
 
-src/app/shared/components/: Componentes reutilizáveis.
+1.  **Instalar as Dependências:** Navegue até o diretório raiz do projeto e execute o seguinte comando para instalar todas as dependências necessárias:
 
-login-modal/: Contém a lógica para o modal de login.
+    ```bash
+    npm install
+    ```
 
-register-modal/: Contém a lógica para o modal de registro.
+2.  **Iniciar o Projeto Host:** Inicie o servidor de desenvolvimento do Angular:
 
-src/app/shared/store/: O diretório do NgRx.
+    ```bash
+    npm start
+    ```
 
-transaction.actions.ts: Define as ações para interagir com as transações.
+    O projeto estará acessível em seu navegador através do endereço: `http://localhost:4200`.
 
-transaction.reducer.ts: Define como o estado das transações muda com base nas ações.
+3.  **Iniciar o Microfrontend (MFE1):** Para que a rota `/projetoFinanceiro` funcione corretamente e o microfrontend seja carregado, é **essencial** que o projeto `mfe1` esteja em execução. Certifique-se de iniciar o servidor dele em seu respectivo repositório. O projeto host irá carregá-lo dinamicamente a partir de `http://localhost:4201`.
 
-transaction.selectors.ts: Define funções para selecionar partes específicas do estado global.
+## ⚙️ API (Back-end)
 
+Este projeto host interage com uma **API REST** para diversas operações, incluindo autenticação e gerenciamento de dados. As rotas e detalhes de integração com esta API serão fornecidos separadamente ou podem ser encontrados na documentação específica do back-end.
 
-✨ Funcionalidades do Projeto Host
-As funcionalidades principais implementadas no projeto host incluem:
-
-Homepage: Uma página de boas-vindas que destaca as vantagens de abrir uma conta.
-
-Modais de Autenticação: A página inicial apresenta botões para "Login" e "Registrar", que abrem modais para que o usuário insira suas credenciais.
-
-Roteamento Dinâmico: Ao fazer login, o usuário é redirecionado para a rota /projetoFinanceiro, que carrega o microfrontend mfe1. Esta rota é protegida pelo AuthGuard.
-
-Integração com a API: O AuthService e o AuthInterceptor garantem a comunicação segura com a API para login e outras operações.
-
-Estado Compartilhado: O NgRx é utilizado para gerenciar o estado do usuário, como o token de autenticação e a lista de transações, tornando-o acessível a todos os componentes.
-
-Componentes Reutilizáveis: Componentes de interface como Header e Footer. Modais para login e registro (LoginModalComponent e RegisterModalComponent).
-
-
-💻 Como Rodar o Projeto
-Pré-requisitos
-Certifique-se de ter o Docker e/ou Node.js instalados.
-
-Com Docker
-Construir a imagem:
-
-docker build -t host-app .
-Executar o container:
-
-docker run -p 4200:4200 host-app
-A aplicação estará disponível em http://localhost:4200.
-
-Sem Docker
-
-Instalar as Dependências: Navegue até o diretório raiz do projeto e execute:
-
-npm install
-
-Iniciar o Projeto Host: Inicie o servidor de desenvolvimento do Angular:
-
-npm start
-
-O projeto estará acessível em http://localhost:4200.
-
-Iniciar o Microfrontend (MFE1): Para que a rota /projetoFinanceiro funcione corretamente, é necessário que o projeto mfe1 esteja em execução. Certifique-se de iniciar o servidor dele em seu respectivo repositório. O host irá carregá-lo dinamicamente a partir de http://localhost:4201.
-
-⚙️ API (Back-end)
-Este projeto host interage com uma API REST. As rotas para esta API estão detalhadas abaixo.
