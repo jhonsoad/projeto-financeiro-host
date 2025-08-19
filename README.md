@@ -132,7 +132,7 @@ Caso prefira rodar o projeto diretamente em seu ambiente local:
 
     O projeto estará acessível em seu navegador através do endereço: `http://localhost:4200`.
 
-3.  **Iniciar o Microfrontend (MFE1):** Para que a rota `/projetoFinanceiro` funcione corretamente e o microfrontend seja carregado, é **essencial** que o projeto `mfe1` esteja em execução. Certifique-se de iniciar o servidor dele em seu respectivo repositório. O projeto host irá carregá-lo dinamicamente a partir de `http://localhost:4201`.
+3.  **Iniciar o Microfrontend (MFE1):** Para que a rota `/projetoFinanceiro` funcione corretamente e o microfrontend seja carregado, é **essencial** que o projeto [mfe1](https://github.com/jhonsoad/projeto-financeiro-app) esteja em execução. Certifique-se de iniciar o servidor dele em seu respectivo repositório. O projeto host irá carregá-lo dinamicamente a partir de `http://localhost:4201`.
 
 ## ⚙️ API (Back-end)
 
